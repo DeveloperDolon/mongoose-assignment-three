@@ -24,4 +24,6 @@ router.put(
   ServiceController.updateService
 );
 
+router.delete('/:id', auth('admin'), ServiceController.deleteService);
+
 export const ServiceRoute = router;

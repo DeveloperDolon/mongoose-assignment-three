@@ -27,7 +27,7 @@ const getServiceWithId = catchAsync(async (req, res) => {
 });
 
 const getAllServices = catchAsync(async (req, res) => {
-  const result = await ServiceModel.find();
+  const result = await ServiceModel.find({ isDeleted: false });
 
   sendResponse(res, {
     success: true,
@@ -51,9 +51,21 @@ const updateService = catchAsync(async (req, res) => {
   });
 });
 
+const deleteService = catchAsync(async (req, res) => {
+  const result = await ServicesService.deleteServiceFromDB(req?.params?.id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Service deleted successfully',
+    data: result,
+  });
+});
+
 export const ServiceController = {
   createService,
   getServiceWithId,
   getAllServices,
   updateService,
+  deleteService,
 };
