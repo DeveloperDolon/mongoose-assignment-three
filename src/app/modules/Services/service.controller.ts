@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ServicesService } from './service.service';
+import { ServiceModel } from './service.model';
 
 const createService = catchAsync(async (req, res) => {
   const result = await ServicesService.createServiceIntoDB(req.body);
@@ -25,7 +26,19 @@ const getServiceWithId = catchAsync(async (req, res) => {
   });
 });
 
+const getAllServices = catchAsync(async (req, res) => {
+  const result = await ServiceModel.find();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Services retrieved successfully',
+    data: result,
+  });
+});
+
 export const ServiceController = {
   createService,
   getServiceWithId,
+  getAllServices,
 };
