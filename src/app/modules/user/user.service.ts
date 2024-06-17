@@ -11,8 +11,9 @@ const createUserIntoDB = async (payload: TUser) => {
 
   try {
     const result = await User.create(payload);
+    const response = result.toObject({ versionKey: false });
 
-    return result;
+    return response;
   } catch (err: any) {
     throw new Error(err);
   }
