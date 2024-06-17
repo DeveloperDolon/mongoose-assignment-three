@@ -8,6 +8,13 @@ const createServiceIntoDB = async (payload: TService) => {
   return response;
 };
 
+const getServicesFromDB = async (id: string) => {
+  const result = await ServiceModel.findById(id);
+
+  return result;
+};
+
 export const ServicesService = {
   createServiceIntoDB,
+  getServicesFromDB,
 };
