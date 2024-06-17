@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import config from '../../config';
 import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
+import { sendResponseForToken } from '../../utils/sendResponse';
 import { AuthServices } from './auth.service';
 import { User } from '../user/user.model';
 
@@ -17,7 +17,7 @@ const loginUser = catchAsync(async (req, res) => {
 
   const userData = await User.findOne({ email: req?.body?.email }, '-__v');
 
-  sendResponse(res, {
+  sendResponseForToken(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User logged in successfully',

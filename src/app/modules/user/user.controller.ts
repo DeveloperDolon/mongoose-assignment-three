@@ -1,4 +1,3 @@
-import { Request } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import { UserServices } from './user.service';
 import { TUser } from './user.interface';
