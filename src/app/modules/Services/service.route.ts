@@ -17,4 +17,11 @@ router.get('/:id', ServiceController.getServiceWithId);
 
 router.get('/', ServiceController.getAllServices);
 
+router.put(
+  '/:id',
+  auth('admin'),
+  validateRequest(ServiceValidationSchema.serviceUpdateValidationSchema),
+  ServiceController.updateService
+);
+
 export const ServiceRoute = router;
