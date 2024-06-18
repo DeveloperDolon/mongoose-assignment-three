@@ -6,11 +6,6 @@ import { SlotController } from './slot.controller';
 
 const router = express.Router();
 
-router.post(
-  '/',
-  auth('admin'),
-  validateRequest(SlotValidationSchema.slotCreateValidationSchema),
-  SlotController.createSlot
-);
+router.get('/available', SlotController.getAvailableSlots);
 
 export const SlotRoute = router;

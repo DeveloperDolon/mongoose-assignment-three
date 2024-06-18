@@ -3,6 +3,8 @@ import validateRequest from '../../middlewares/validateRequest';
 import { ServiceValidationSchema } from './service.validation';
 import { ServiceController } from './service.controller';
 import auth from '../../middlewares/auth';
+import { SlotValidationSchema } from '../Slot/slot.validation';
+import { SlotController } from '../Slot/slot.controller';
 
 const router = express.Router();
 
@@ -25,5 +27,12 @@ router.put(
 );
 
 router.delete('/:id', auth('admin'), ServiceController.deleteService);
+
+router.post(
+  '/slots',
+  auth('admin'),
+  validateRequest(SlotValidationSchema.slotCreateValidationSchema),
+  SlotController.createSlot
+);
 
 export const ServiceRoute = router;
