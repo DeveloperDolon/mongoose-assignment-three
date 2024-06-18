@@ -3,6 +3,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ServicesService } from './service.service';
 import { ServiceModel } from './service.model';
+import { dataResponse } from '../../utils/dataResponse';
 
 const createService = catchAsync(async (req, res) => {
   const result = await ServicesService.createServiceIntoDB(req.body);
@@ -18,23 +19,13 @@ const createService = catchAsync(async (req, res) => {
 const getServiceWithId = catchAsync(async (req, res) => {
   const result = await ServicesService.getServicesFromDB(req?.params?.id);
 
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Service retrieved successfully',
-    data: result,
-  });
+  dataResponse(result, 'Service retrieved successfully', res);
 });
 
 const getAllServices = catchAsync(async (req, res) => {
   const result = await ServiceModel.find({ isDeleted: false });
 
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Services retrieved successfully',
-    data: result,
-  });
+  dataResponse(result, 'Services retrieved successfully', res);
 });
 
 const updateService = catchAsync(async (req, res) => {

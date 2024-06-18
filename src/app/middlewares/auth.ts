@@ -6,17 +6,21 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import httpStatus from 'http-status';
 import config from '../config';
 import { User } from '../modules/user/user.model';
+import AuthError from '../errors/AuthError';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.replace('Bearer ', '');
 
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
+      throw new AuthError(
+        httpStatus?.UNAUTHORIZED,
+        'You have no access to this route'
+      );
     }
 
     const decode = jwt.verify(
-      token,
+      token as string,
       config.jwt_access_secret as string
     ) as JwtPayload;
 
@@ -29,7 +33,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized hi!');
+      throw new AuthError(
+        httpStatus?.UNAUTHORIZED,
+        'You have no access to this route'
+      );
     }
 
     req.user = decode as JwtPayload;

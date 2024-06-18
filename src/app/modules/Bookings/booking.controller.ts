@@ -3,6 +3,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { BookingServices } from './booking.service';
 import { Booking } from './booking.model';
+import { dataResponse } from '../../utils/dataResponse';
 
 const createBookings = catchAsync(async (req, res) => {
   const result = await BookingServices.createBookingIntoDB(req.body, req?.user);
@@ -21,23 +22,13 @@ const getAllBookings = catchAsync(async (req, res) => {
     .populate('serviceId')
     .populate('slotId');
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'All bookings retrieved successfully',
-    data: result,
-  });
+  dataResponse(result, 'All bookings retrieved successfully', res);
 });
 
 const getUserBookings = catchAsync(async (req, res) => {
   const result = await BookingServices.getUserBookingsFromDB(req.user);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'All bookings retrieved successfully',
-    data: result,
-  });
+  dataResponse(result, 'User bookings retrieved successfully', res);
 });
 
 export const BookingController = {

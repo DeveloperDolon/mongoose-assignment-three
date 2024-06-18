@@ -7,6 +7,8 @@ import handleCastError from '../errors/handleCastError';
 import handleDuplicateError from '../errors/handleDuplicateError';
 import AppError from '../errors/AppError';
 import config from '../config';
+import AuthError from '../errors/AuthError';
+import httpStatus from 'http-status';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
@@ -55,6 +57,13 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         message: err?.message,
       },
     ];
+  }
+  if (err instanceof AuthError) {
+    return res.status(httpStatus.UNAUTHORIZED).json({
+      success: false,
+      statusCode: err?.statusCode,
+      message: err?.message,
+    });
   }
 
   return res.status(statusCode).json({
