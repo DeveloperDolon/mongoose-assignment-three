@@ -26,7 +26,7 @@ const deleteServiceFromDB = async (id: string) => {
   const result = await ServiceModel.findByIdAndUpdate(
     id,
     { isDeleted: true },
-    { new: true }
+    { new: true },
   );
 
   return result;

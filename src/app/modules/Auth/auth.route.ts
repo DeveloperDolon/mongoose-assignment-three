@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
   '/login',
   validateRequest(AuthValidation.loginValidation),
-  AuthController.loginUser
+  AuthController.loginUser,
 );
 
 export const AuthRoute = router;

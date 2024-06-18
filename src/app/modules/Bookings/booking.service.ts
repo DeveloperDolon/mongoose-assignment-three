@@ -9,7 +9,7 @@ import { Slot } from '../Slot/slot.model';
 const createBookingIntoDB = async (payload: TBooking, userInfo: JwtPayload) => {
   const userData = await User.findOne(
     { email: userInfo?.userEmail },
-    { _id: 1 }
+    { _id: 1 },
   );
 
   if (!userData) {
@@ -27,7 +27,7 @@ const createBookingIntoDB = async (payload: TBooking, userInfo: JwtPayload) => {
   const updateSlot = await Slot.findByIdAndUpdate(
     payload?.slotId,
     { isBooked: 'booked' },
-    { new: true }
+    { new: true },
   );
 
   const result = await (

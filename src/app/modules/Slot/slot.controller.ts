@@ -18,7 +18,7 @@ const createSlot = catchAsync(async (req, res) => {
 const getAvailableSlots = catchAsync(async (req, res) => {
   const result = await SlotServices.getAvailableSlotsFromDB(
     req?.query?.date as string,
-    req?.query?.serviceId as string
+    req?.query?.serviceId as string,
   );
 
   dataResponse(result, 'Available slots retrieved successfully', res);

@@ -35,7 +35,7 @@ export const sendUnauthorizedResponse = (res: Response) => {
 
 export const sendResponseForToken = <T>(
   res: Response,
-  data: TTokenResponse<T>
+  data: TTokenResponse<T>,
 ) => {
   res.status(data?.statusCode).json({
     success: data?.success,

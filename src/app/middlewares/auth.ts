@@ -15,13 +15,13 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (!token) {
       throw new AuthError(
         httpStatus?.UNAUTHORIZED,
-        'You have no access to this route'
+        'You have no access to this route',
       );
     }
 
     const decode = jwt.verify(
       token as string,
-      config.jwt_access_secret as string
+      config.jwt_access_secret as string,
     ) as JwtPayload;
 
     const { role, userEmail, iat } = decode;
@@ -35,7 +35,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AuthError(
         httpStatus?.UNAUTHORIZED,
-        'You have no access to this route'
+        'You have no access to this route',
       );
     }
 

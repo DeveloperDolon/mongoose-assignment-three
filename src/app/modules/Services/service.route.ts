@@ -12,7 +12,7 @@ router.post(
   '/',
   auth('admin'),
   validateRequest(ServiceValidationSchema.serviceCreateValidationSchema),
-  ServiceController.createService
+  ServiceController.createService,
 );
 
 router.get('/:id', ServiceController.getServiceWithId);
@@ -23,7 +23,7 @@ router.put(
   '/:id',
   auth('admin'),
   validateRequest(ServiceValidationSchema.serviceUpdateValidationSchema),
-  ServiceController.updateService
+  ServiceController.updateService,
 );
 
 router.delete('/:id', auth('admin'), ServiceController.deleteService);
@@ -32,7 +32,7 @@ router.post(
   '/slots',
   auth('admin'),
   validateRequest(SlotValidationSchema.slotCreateValidationSchema),
-  SlotController.createSlot
+  SlotController.createSlot,
 );
 
 export const ServiceRoute = router;

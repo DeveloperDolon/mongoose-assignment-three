@@ -31,7 +31,7 @@ const getAllServices = catchAsync(async (req, res) => {
 const updateService = catchAsync(async (req, res) => {
   const result = await ServicesService.updateServiceIntoDB(
     req?.params?.id,
-    req.body
+    req.body,
   );
 
   sendResponse(res, {
